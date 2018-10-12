@@ -76,14 +76,6 @@
         };
     };
 
-    // Cleanup function when the extension is unloaded
-    ext._shutdown = function () {
-        var msg = JSON.stringify({
-            "command": "shutdown"
-        });
-        window.socket.send(msg);
-    };
-
 	ext.distFromUltrasonicSensor = function (callback) {
 		// Return float value from distance sensor
 		if (connected == false) {
