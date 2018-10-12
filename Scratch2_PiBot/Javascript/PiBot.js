@@ -77,7 +77,7 @@
     };
 
 
-	ext.getdistance = fucntion(callback){
+	ext.distFromUltrasonicSensor = fucntion(callback){
 		// Return float value from distance sensor
 		if (connected == false) {
             alert("Server Not Connected");
@@ -93,10 +93,12 @@
     var descriptor = {
         blocks: [
         // Block type, block name, fnct name
-        [" ", 'Connect to Python server', 'connect']
+        [" ", 'Connect to Python server', 'connect'],
+        ["r", 'Distance from ultrasonic sensor ', 'distFromUltrasonicSensor']
         ]
+
     };
 
-    // Register the extension
-    ScratchExtensions.register('PiBot, descriptor, ext);
+// Register the extension
+ScratchExtensions.register('PiBot.js', descriptor, ext);
 })({});
