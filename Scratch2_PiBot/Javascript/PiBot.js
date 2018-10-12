@@ -6,10 +6,10 @@
     // an array to hold possible digital input values for the reporter block
     //var digital_inputs = new Array(32);
     
-    var distance = 0.0
+    var digital_inputs = new Array(32);
     var myStatus = 1; // initially yellow
     var myMsg = 'not_ready';
-    
+    var distance = 0.0
     
     
     
@@ -28,9 +28,6 @@
     };
 
 
-
-
- 
 
     ext.connect = function (callback) {
         window.socket = new WebSocket("ws://127.0.0.1:9000");
@@ -65,6 +62,12 @@
                 var pin = msg['pin'];
                 digital_inputs[parseInt(pin)] = msg['level']
             }
+
+            if(reporter === 'ultrasonicdistance') {
+                distance = msg['value'];
+                console.log(msg)
+            }
+
             console.log(message.data)
         };
         window.socket.onclose = function (e) {
@@ -76,13 +79,18 @@
         };
     };
 
-	ext.distFromUltrasonicSensor = function (callback) {
+	ext.getdistance = function () {
 		// Return float value from distance sensor
 		if (connected == false) {
             alert("Server Not Connected");
         }
         else {
-                return distance;
+            var msg = JSON.stringify({
+                "command": 'getdistance'
+            });
+            console.log(msg);
+            window.socket.send(msg);
+            return distance
         }
 	};
 
@@ -93,7 +101,7 @@
         blocks: [
         // Block type, block name, fnct name
         [" ", 'Connect to Python server', 'connect'],
-        ["r", 'Distance from ultrasonic sensor ', 'distFromUltrasonicSensor']
+        ["r", 'Distance from ultrasonic sensor ', 'getdistance']
         ]
 
     };
