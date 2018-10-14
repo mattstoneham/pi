@@ -107,17 +107,17 @@
 
 	ext.getdistance = function () {
         // Return float value from distance sensor
-        console.log('ext.getdistance')
-		if (connected == false) {
+        if (connected == false) {
             alert("Not Connected");
         }
         else {
-            var msg = JSON.stringify({
-                "command": 'getdistance'
-            });
-            console.log(msg);
-            window.socket.send(msg);
-            return distance
+        //    var msg = JSON.stringify({
+        //        "command": 'getdistance'
+        //    });
+        //    console.log(msg);
+        //    window.socket.send(msg);
+        //    return distance
+        return 99999
         }
 	};
 
