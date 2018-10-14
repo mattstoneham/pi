@@ -63,7 +63,8 @@
             }
 
             if(reporter === 'ultrasonicdistance') {
-                distance = msg['value'];
+                //distance = msg['value'];
+                distance = 54321
                 console.log(msg)
             }
 
