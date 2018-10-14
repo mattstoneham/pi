@@ -117,7 +117,9 @@
         //    console.log(msg);
         //    window.socket.send(msg);
         //    return distance
-        return 99999
+        ///return 99999
+        var data = 'return 888'
+        eval(data)
         }
 	};
 
