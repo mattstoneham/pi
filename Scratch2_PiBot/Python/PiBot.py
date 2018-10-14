@@ -37,9 +37,9 @@ class S2Pi(WebSocket):
         payload = json.loads(self.data)
         print(payload)
         client_cmd = payload['command']
-        # When the user wishes to set a pin as a digital Input
+        
         if client_cmd == 'getdistance':
-            distance = RRB3().get_distance()
+            distance = 999 #RRB3().get_distance()
             payload = {'report': 'ultrasonicdistance', 'value': str(distance)}
             print('callback', payload)
             msg = json.dumps(payload)
