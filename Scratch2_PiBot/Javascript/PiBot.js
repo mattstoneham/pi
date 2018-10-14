@@ -105,6 +105,7 @@
         sendData('man whats 1+1', function(data){console.log('server response:');console.log(data);});
     }
 
+        //d
 	ext.getdistance = function () {
         // Return float value from distance sensor
         if (connected == false) {

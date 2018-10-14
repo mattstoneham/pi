@@ -39,7 +39,7 @@ class S2Pi(WebSocket):
         client_cmd = payload['command']
         
         if client_cmd == 'getdistance':
-            distance = 999 #RRB3().get_distance()
+            distance = 456 #RRB3().get_distance()
             payload = {'report': 'ultrasonicdistance', 'value': str(distance)}
             print('callback', payload)
             msg = json.dumps(payload)
