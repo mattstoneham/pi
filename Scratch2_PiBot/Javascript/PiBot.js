@@ -4,8 +4,6 @@
 	var connected = false;
 
     // an array to hold possible digital input values for the reporter block
-    //var digital_inputs = new Array(32);
-    
     var digital_inputs = new Array(32);
     var myStatus = 1; // initially yellow
     var myMsg = 'not_ready';
@@ -72,25 +70,6 @@
             console.log(message.data)
         };
 
-        // Function for sending data
-        var socketQueueId = 0;
-        var socketQueue = {};
-        function sendData(data, onReturnFunction){
-            socketQueueId++;
-            if (typeof(returnFunc) == 'function'){
-                // the 'i_' prefix is a good way to force string indices
-                socketQueue['i_'+socketQueueId] = onReturnFunction;
-            }
-            msg = JSON.stringify({'cmd_id':socketQueueId, 'json_data':data});
-            try{
-                window.socket.send(msg);
-                console.log('Sent');
-            }catch(e){
-                console.log('Sending failed ... .disconnected failed');
-            }
-        }
-        
-
         window.socket.onclose = function (e) {
             console.log("Connection closed.");
             socket = null;
@@ -100,10 +79,37 @@
         };
     };
 
+    // Function for sending data
+    // Sen
+    var socketQueueId = 0;
+    var socketQueue = {};
+    function sendData(data, onReturnFunction){
+        socketQueueId++;
+        if (typeof(returnFunc) == 'function'){
+            // the 'i_' prefix is a good way to force string indices
+            socketQueue['i_'+socketQueueId] = onReturnFunction;
+        }
+        msg = JSON.stringify({'cmd_id':socketQueueId, 'json_data':data});
+        try{
+            window.socket.send(msg);
+            console.log('Sent');
+        }catch(e){
+            console.log('Sending failed ... .disconnected failed');
+        }
+    }
+
+    ext.getdatatest = function () {
+        //msg = JSON.stringify({
+        //    "command": 'getdatatest'
+        //});
+        sendData('man whats 1+1', function(data){console.log('server response:');console.log(data);});
+    }
+
 	ext.getdistance = function () {
-		// Return float value from distance sensor
+        // Return float value from distance sensor
+        console.log('ext.getdistance')
 		if (connected == false) {
-            alert("Server Not Connected");
+            alert("Not Connected");
         }
         else {
             var msg = JSON.stringify({
