@@ -58,7 +58,6 @@
             // handle the only reporter message from the server
             // for changes in digital input state
             var reporter = msg['report'];
-            
             if(reporter === 'digital_input_change') {
                 var pin = msg['pin'];
                 digital_inputs[parseInt(pin)] = msg['level']
@@ -71,26 +70,6 @@
 
             console.log(message.data)
         };
-
-        // Function for sending data
-        var socketQueueId = 0;
-        var socketQueue = {};
-        function sendData(data, onReturnFunction){
-            socketQueueId++;
-            if (typeof(returnFunc) == 'function'){
-                // the 'i_' prefix is a good way to force string indices
-                socketQueue['i_'+socketQueueId] = onReturnFunction;
-            }
-            msg = JSON.stringify({'cmd_id':socketQueueId, 'json_data':data});
-            try{
-                window.socket.send(msg);
-                console.log('Sent');
-            }catch(e){
-                console.log('Sending failed ... .disconnected failed');
-            }
-        }
-        
-
         window.socket.onclose = function (e) {
             console.log("Connection closed.");
             socket = null;
